@@ -1,0 +1,51 @@
+@extends('layouts.app')
+
+@section('title', 'Tambah Kriteria')
+
+@section('content')
+<div class="max-w-2xl mx-auto">
+    <x-card>
+        <x-slot name="header">
+            <h2 class="text-xl font-bold text-slate-800 uppercase tracking-tight">Tambah Kriteria Baru</h2>
+        </x-slot>
+
+        <form action="{{ route('kriteria.store') }}" method="POST" class="space-y-6">
+            @csrf
+            
+            <div class="space-y-2">
+                <x-input-label for="nama" value="Nama Kriteria" />
+                <x-text-input type="text" name="nama" id="nama" 
+                    placeholder="Contoh: Kedisiplinan"
+                    class="w-full" 
+                    value="{{ old('nama') }}" required />
+                <x-input-error :messages="$errors->get('nama')" class="mt-2" />
+            </div>
+
+            <div class="space-y-2">
+                <x-input-label for="tipe" value="Tipe Kriteria" />
+                <select name="tipe" id="tipe" class="w-full px-4 py-3 bg-white/50 backdrop-blur-sm border border-slate-200 focus:border-primary-500 focus:ring focus:ring-primary-500/20 rounded-2xl transition-all duration-200 shadow-sm font-sans" required>
+                    <option value="" disabled selected>Pilih Tipe</option>
+                    <option value="benefit" {{ old('tipe') == 'benefit' ? 'selected' : '' }}>Benefit (Semakin Tinggi Semakin Baik)</option>
+                    <option value="cost" {{ old('tipe') == 'cost' ? 'selected' : '' }}>Cost (Semakin Rendah Semakin Baik)</option>
+                </select>
+                <x-input-error :messages="$errors->get('tipe')" class="mt-2" />
+            </div>
+
+            <div class="pt-4 flex items-center justify-between gap-4">
+                <a href="{{ route('kriteria.index') }}" class="px-6 py-3 rounded-2xl font-bold text-slate-500 hover:bg-slate-100 transition-all flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                    </svg>
+                    Batal
+                </a>
+                <x-primary-button class="px-8 py-3 flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    Simpan Kriteria
+                </x-primary-button>
+            </div>
+        </form>
+    </x-card>
+</div>
+@endsection
