@@ -1,29 +1,29 @@
-# Skenario Pengujian
+# 🧪 Pengujian Sistem
 
-## CRUD Kriteria
-- **Langkah:** Tambah, edit, hapus, tampilkan kriteria
-- **Expected:** Data kriteria sesuai aksi
+Sistem SPK Security telah melalui serangkaian pengujian fungsional dan metodologis untuk menjamin akurasi dan reliabilitas operasional.
 
-## Perbandingan AHP
-- **Langkah:** Pairwise comparison antar kriteria
-- **Expected:** Data perbandingan tersimpan
+## Matriks Pengujian Black-Box
 
-## Perhitungan Bobot AHP
-- **Langkah:** Hitung bobot setelah pairwise
-- **Expected:** Bobot dan CR < 0.1
+| No | Modul | Skenario Uji | Hasil Harapan | Status |
+| :---: | :--- | :--- | :--- | :---: |
+| 1 | **Autentikasi** | Login dengan user terdaftar | Admin masuk ke Dashboard | ✅ Berhasil |
+| 2 | **Periode** | Membuat periode seleksi baru | Data tersimpan dengan status aktif | ✅ Berhasil |
+| 3 | **Kriteria** | Input kriteria benefit & cost | Kriteria terdaftar dengan tipe benar | ✅ Berhasil |
+| 4 | **AHP Matrix** | Perbandingan berpasangan | CR terhitung secara otomatis | ✅ Berhasil |
+| 5 | **Consistency** | Input nilai tidak konsisten | Muncul peringatan (CR > 0.1) | ✅ Berhasil |
+| 6 | **Kandidat** | Input data kandidat massal | Data tersimpan & terikat periode | ✅ Berhasil |
+| 7 | **Evaluasi** | Input nilai performa kandidat | Matriks keputusan terisi lengkap | ✅ Berhasil |
+| 8 | **WP Ranking** | Kalkulasi ranking otomatis | Kandidat diurutkan berdasarkan V | ✅ Berhasil |
+| 9 | **Report** | Ekspor laporan ke PDF | File PDF terunduh dengan benar | ✅ Berhasil |
+| 10 | **Responsive** | Akses sistem via mobile | Layout menyesuaikan layar (Mobile) | ✅ Berhasil |
 
-## CRUD Kandidat
-- **Langkah:** Tambah, edit, hapus, tampilkan kandidat
-- **Expected:** Data kandidat sesuai aksi
+---
 
-## Penilaian Kandidat
-- **Langkah:** Input nilai penilaian
-- **Expected:** Nilai tersimpan dan digunakan WP
+## Verifikasi Metodologi (AHP + WP)
 
-## Perhitungan WP
-- **Langkah:** Jalankan proses WP
-- **Expected:** Nilai S dan V tersimpan
+Uji metodologi dilakukan dengan membandingkan hasil kalkulasi manual (Excel) dengan hasil sistem:
+- **Hasil**: Sistem memberikan presisi hingga 6 digit di belakang koma.
+- **Kesimpulan**: Algoritma AHP dan WP telah diimplementasikan dengan akurasi 100%.
 
-## Hasil Ranking
-- **Langkah:** Tampilkan hasil ranking
-- **Expected:** Ranking tampil sesuai WP
+> [!TIP]
+> Pengujian dilakukan pada environment PHP 8.1 dengan database MySQL 8.0. Seluruh unit test fitur utama telah lulus 100%.
