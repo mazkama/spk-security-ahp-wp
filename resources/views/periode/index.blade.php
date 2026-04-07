@@ -24,7 +24,7 @@
                 <x-slot name="thead">
                     <tr class="bg-slate-50/50 border-b border-slate-100 uppercase tracking-[0.2em] text-[10px] font-black text-slate-400">
                         <th class="px-6 py-5 text-center w-16">#</th>
-                        <th class="px-6 py-5 text-left">Nama Periote</th>
+                        <th class="px-6 py-5 text-left">Nama Periode</th>
                         <th class="px-6 py-5 text-left min-w-[200px]">Jadwal</th>
                         <th class="px-6 py-5 text-center">Status</th>
                         <th class="px-8 py-5 text-right whitespace-nowrap">Aksi Kelola</th>
@@ -85,7 +85,7 @@
                                         @csrf
                                         <button class="w-9 h-9 flex items-center justify-center bg-white border border-amber-100 rounded-xl text-amber-600 hover:bg-amber-600 hover:text-white transition-all shadow-sm hover:shadow-amber-200 active:scale-95 group/btn" title="Lock Periode">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m0 0v2m0-2h2m-2 0H10m11-3V7a2 2 0 00-2-2H5a2 2 0 00-2-2v10a2 2 0 002 2h14a2 2 0 002-2v-4z" />
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                                             </svg>
                                         </button>
                                     </form>
