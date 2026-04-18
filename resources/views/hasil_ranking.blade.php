@@ -149,7 +149,7 @@
                 <div class="overflow-x-auto custom-scrollbar">
                     <x-table class="w-full">
                         <x-slot name="thead">
-                            <tr class="bg-slate-50 border-b border-slate-100 uppercase tracking-[0.2em] text-[10px] font-black text-slate-400">
+                            <tr class="bg-slate-50 border-b border-slate-100 uppercase tracking-[0.2em] text-[10px] font-black text-slate-700">
                                 <th class="px-10 py-7 text-center w-28">Peringkat</th>
                                 <th class="px-8 py-7 text-left min-w-[280px]">Identitas Kandidat</th>
                                 <th class="px-8 py-7 text-center">Vektor S (Produk)</th>
@@ -174,7 +174,7 @@
                                     </div>
                                 </td>
                                 <td class="px-8 py-6 text-center">
-                                    <span class="text-[11px] font-black text-slate-400 font-mono tracking-tighter">{{ number_format($row->nilai_s, 6) }}</span>
+                                    <span class="text-[12px] font-black text-slate-700 font-mono tracking-tighter">{{ number_format($row->nilai_s, 4) }}</span>
                                 </td>
                                 <td class="px-10 py-6 text-right">
                                     <span class="inline-flex items-center px-5 py-3 rounded-2xl bg-slate-50 border border-slate-100 text-slate-700 font-mono text-sm font-black shadow-inner group-hover:bg-primary-600 group-hover:text-white group-hover:border-primary-500 transition-all">
