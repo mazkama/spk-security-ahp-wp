@@ -10,10 +10,18 @@ use App\Models\Kriteria;
 use App\Models\Penilaian;
 use App\Models\BobotKriteria;
 use App\Models\Periode;
+use App\Services\WPService;
 use Barryvdh\DomPDF\Facade\Pdf;
 
 class HasilRankingController extends Controller
 {
+    protected $wpService;
+
+    public function __construct(WPService $wpService)
+    {
+        $this->wpService = $wpService;
+    }
+
     public function index()
     {
         $periode = Periode::all();
@@ -27,7 +35,7 @@ class HasilRankingController extends Controller
         })->exists();
 
         if ($activePeriode && ($activePeriode->status != 'selesai' || !$exists)) {
-            $this->calculate($activePeriodeId);
+            $this->wpService->hitungWP($activePeriodeId);
         }
         
         $hasil = HasilWp::with('kandidat')
@@ -45,74 +53,7 @@ class HasilRankingController extends Controller
         ]);
     }
 
-    private function calculate($periodeId)
-    {
-        $kriterias = Kriteria::all();
-        $kandidats = Kandidat::where('periode_id', $periodeId)->get();
-        $weights = BobotKriteria::all()->keyBy('kriteria_id');
-        
-        if ($kriterias->isEmpty() || $kandidats->isEmpty() || $weights->isEmpty()) {
-            return;
-        }
 
-        // 1. Collect Scores Matrix
-        $penilaians = Penilaian::whereIn('kandidat_id', $kandidats->pluck('id'))
-            ->get()
-            ->groupBy('kandidat_id')
-            ->map(function($items) {
-                return $items->keyBy('kriteria_id');
-            });
-
-        // 2. WP Calculation
-        $vectorsS = [];
-        $sumS = 0;
-
-        foreach ($kandidats as $kandidat) {
-            $s = 1;
-            foreach ($kriterias as $kriteria) {
-                $score = $penilaians->has($kandidat->id) && $penilaians[$kandidat->id]->has($kriteria->id)
-                    ? $penilaians[$kandidat->id][$kriteria->id]->nilai
-                    : 1;
-
-                $w = isset($weights[$kriteria->id]) ? $weights[$kriteria->id]->bobot : 0;
-                
-                if ($kriteria->tipe == 'cost') {
-                    $w = -$w;
-                }
-
-                $s *= pow($score, $w);
-            }
-            $vectorsS[$kandidat->id] = $s;
-            $sumS += $s;
-        }
-
-        // 3. Normalize & Store - Filter only for this period
-        HasilWp::whereHas('kandidat', function($q) use ($periodeId) {
-            $q->where('periode_id', $periodeId);
-        })->delete();
-
-        $results = [];
-        foreach ($kandidats as $kandidat) {
-            $v = ($sumS > 0) ? $vectorsS[$kandidat->id] / $sumS : 0;
-            $results[] = [
-                'kandidat_id' => $kandidat->id,
-                'nilai_s' => $vectorsS[$kandidat->id],
-                'nilai_v' => $v,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ];
-        }
-
-        usort($results, function($a, $b) {
-            return $b['nilai_v'] <=> $a['nilai_v'];
-        });
-
-        foreach ($results as $index => &$res) {
-            $res['ranking'] = $index + 1;
-        }
-
-        HasilWp::insert($results);
-    }
 
     public function exportPdf()
     {

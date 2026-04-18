@@ -23,7 +23,7 @@ AHP digunakan untuk menentukan **bobot prioritas** setiap kriteria.
 WP digunakan untuk melakukan **perangkingan** alternatif (kandidat) berdasarkan bobot yang diperoleh dari AHP.
 
 ### Langkah-langkah:
-1. **Normalisasi Bobot ($w_j$)**: Memastikan total bobot adalah 1 ($\sum w_j = 1$).
+1. **Normalisasi Bobot ($w_j$)**: Memastikan total bobot adalah 1 ($\sum w_j = 1$). Langkah ini krusial agar nilai pangkat tetap dalam skala yang proporsional.
 2. **Perhitungan Vektor S ($S_i$)**:
    $$S_i = \prod_{j=1}^{n} x_{ij}^{w_j}$$
    - Nilai $w_j$ bernilai positif untuk kriteria **Benefit**.

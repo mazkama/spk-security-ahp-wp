@@ -22,8 +22,8 @@ Sistem SPK Security telah melalui serangkaian pengujian fungsional dan metodolog
 ## Verifikasi Metodologi (AHP + WP)
 
 Uji metodologi dilakukan dengan membandingkan hasil kalkulasi manual (Excel) dengan hasil sistem:
-- **Hasil**: Sistem memberikan presisi hingga 6 digit di belakang koma.
-- **Kesimpulan**: Algoritma AHP dan WP telah diimplementasikan dengan akurasi 100%.
+- **Hasil**: Sistem memberikan presisi tinggi dan telah diverifikasi cocok dengan perhitungan manual (Excel) termasuk normalisasi bobot dan penanganan kriteria cost.
+- **Kesimpulan**: Algoritma AHP dan WP telah diimplementasikan dengan akurasi maksimal sesuai kaidah standar.
 
 > [!TIP]
 > Pengujian dilakukan pada environment PHP 8.1 dengan database MySQL 8.0. Seluruh unit test fitur utama telah lulus 100%.
